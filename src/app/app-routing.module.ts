@@ -1,7 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CreateRestaurantComponent } from './create-restaurant/create-restaurant.component';
+import { RestaurantListComponent } from './restaurant-list/restaurant-list.component';
+import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail.component';
+import { CreaterestaurantGuard } from './guards/createrestaurant.guard';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: "restaurants/new", component: CreateRestaurantComponent, canActivate: [CreaterestaurantGuard]
+  },
+  {
+    path: "restaurants/:id", component: RestaurantDetailComponent
+  },
+  {
+    path: "restaurants", component: RestaurantListComponent
+  },
+  {
+    path: '', redirectTo: 'restaurants', pathMatch: 'full'
+  },
+  {
+    path: '**', component: RestaurantListComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

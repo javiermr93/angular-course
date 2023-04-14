@@ -1,0 +1,14 @@
+<mat-toolbar class="bg-toolbar">
+  <!-- Otra opción
+  <a mat-button routerLink="restaurants" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Restaurant List</a> -->
+
+  <button mat-button routerLink="restaurants" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Restaurant List</button>
+  <button mat-button routerLink="restaurants/new" routerLinkActive="nombredeclasecualquiera" [routerLinkActiveOptions]="{exact: true}">Create Restaurant</button>
+  <button mat-icon-button (click)="changeTheme()">
+    <!-- Versión material 15 -->
+    <!-- <mat-icon fontIcon="brightness_medium"></mat-icon> -->
+
+    <!-- Versión material 12 -->
+    <mat-icon>brightness_medium</mat-icon>
+  </button>
+</mat-toolbar>

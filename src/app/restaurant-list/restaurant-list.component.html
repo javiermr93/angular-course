@@ -1,0 +1,5 @@
+<div fxLayout.xs="column" fxLayout="row wrap" fxLayoutAlign="space-between stretch">
+  <div fxFlex="30" fxFlex.sm="48" *ngFor="let restaurant of restaurantList">
+    <app-restaurant [restaurant_input]="restaurant"></app-restaurant>
+  </div>
+</div>
