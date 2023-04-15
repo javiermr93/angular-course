@@ -3,15 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateRestaurantComponent } from './create-restaurant/create-restaurant.component';
 import { RestaurantListComponent } from './restaurant-list/restaurant-list.component';
 import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail.component';
-import { CreaterestaurantGuard } from './guards/createrestaurant.guard';
-import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {
-    path: 'login', component: LoginComponent
-  },
-  {
-    path: "restaurants/new", component: CreateRestaurantComponent, canActivate: [CreaterestaurantGuard]
+    path: "restaurants/new", component: CreateRestaurantComponent
   },
   {
     path: "restaurants/:id", component: RestaurantDetailComponent

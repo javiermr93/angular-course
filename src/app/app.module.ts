@@ -18,7 +18,6 @@ import { HeaderComponent } from './header/header.component';
 import { RestaurantComponent } from './restaurant/restaurant.component';
 import { RestaurantListComponent } from './restaurant-list/restaurant-list.component';
 import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail.component';
-import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +26,7 @@ import { LoginComponent } from './login/login.component';
     RestaurantListComponent,
     RestaurantDetailComponent,
     CreateRestaurantComponent,
-    HeaderComponent,
-    LoginComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
