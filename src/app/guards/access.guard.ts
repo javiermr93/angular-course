@@ -5,11 +5,11 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CreaterestaurantGuard implements CanActivate {
+export class AccessGuard implements CanActivate {
   constructor(private route: Router){}
 
   canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (localStorage.getItem('userLogged')) {
+    if (localStorage.getItem('userLogged') === "true") {
       return true;
     } else {
       this.route.navigate(['/login']);

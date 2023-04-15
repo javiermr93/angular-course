@@ -3,27 +3,38 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateRestaurantComponent } from './create-restaurant/create-restaurant.component';
 import { RestaurantListComponent } from './restaurant-list/restaurant-list.component';
 import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail.component';
-import { CreaterestaurantGuard } from './guards/createrestaurant.guard';
+import { AccessGuard } from './guards/access.guard';
 import { LoginComponent } from './login/login.component';
+import { LoginGuard } from './guards/login.guard';
+import { HeaderComponent } from './header/header.component';
 
 const routes: Routes = [
   {
-    path: 'login', component: LoginComponent
+    path: 'login', component: LoginComponent,
+    canActivate: [LoginGuard]
   },
   {
-    path: "restaurants/new", component: CreateRestaurantComponent, canActivate: [CreaterestaurantGuard]
+    path: '', component: HeaderComponent,
+    children: [
+      {
+        path: "restaurants/new", component: CreateRestaurantComponent,
+        canActivate: [AccessGuard]
+      },
+      {
+        path: "restaurants/:id", component: RestaurantDetailComponent,
+        canActivate: [AccessGuard]
+      },
+      {
+        path: "restaurants", component: RestaurantListComponent,
+        canActivate: [AccessGuard]
+      }
+    ]
   },
   {
-    path: "restaurants/:id", component: RestaurantDetailComponent
+    path: '', redirectTo: 'login', pathMatch: 'full'
   },
   {
-    path: "restaurants", component: RestaurantListComponent
-  },
-  {
-    path: '', redirectTo: 'restaurants', pathMatch: 'full'
-  },
-  {
-    path: '**', component: RestaurantListComponent
+    path: '**', component: LoginComponent
   }
 ];
 

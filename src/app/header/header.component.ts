@@ -1,4 +1,5 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,10 +10,9 @@ export class HeaderComponent implements OnInit {
 
   isDarkTheme: boolean = true;
 
-  constructor(private renderer: Renderer2) { }
+  constructor(private renderer: Renderer2, private route: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   changeTheme() {
     if (this.isDarkTheme) {
@@ -22,6 +22,11 @@ export class HeaderComponent implements OnInit {
       this.renderer.removeClass(document.body, "light-theme");
       this.isDarkTheme = true;
     }
+  }
+
+  logOut() {
+    localStorage.setItem("userLogged", "false");
+    this.route.navigate(['/login']);
   }
 
 }
