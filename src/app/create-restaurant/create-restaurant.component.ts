@@ -43,17 +43,14 @@ export class CreateRestaurantComponent implements OnInit {
       })
     });
 
-    this.route.params.subscribe(params => {
-      console.log(params);
-    })
-
     this.restaurantForm.valueChanges.subscribe(values => {
       console.log(values);
     });
   }
 
   validateOperatingHours(control: AbstractControl): {[key: string]: any} | null {
-    const pattern = '^\\d?\\d:\\d?\\d (pm|am) - \\d?\\d:\\d?\\d (pm|am)(, \\d?\\d:\\d?\\d (pm|am) - \\d?\\d:\\d?\\d (pm|am))?$';
+    // const pattern = '^\\d?\\d:\\d?\\d (pm|am) - \\d?\\d:\\d?\\d (pm|am)(, \\d?\\d:\\d?\\d (pm|am) - \\d?\\d:\\d?\\d (pm|am))?$';
+    const pattern = '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$';
     const regex = new RegExp(pattern);
     const value = control.value;
     const isValid = regex.test(value);
@@ -68,17 +65,7 @@ export class CreateRestaurantComponent implements OnInit {
   submitForm() {
     this.restaurant = this.restaurantForm.value;
 
-    let latitud = {
-      lat: this.restaurantForm.value.latlng,
-      lng: this.restaurantForm.value.latlng
-    }
-
-    delete this.restaurantForm.value.latlng;
-    this.restaurant.name
-    this.restaurant = this.restaurantForm.value;
-    this.restaurant.latlng = latitud;
-
-    // this.restaurantService.createRestaurant(this.restaurant).subscribe();
+    // this.restaurantService.createRestaurant(this.restaurantForm.value).subscribe();
   }
 
 }
