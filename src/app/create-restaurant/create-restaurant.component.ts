@@ -12,16 +12,14 @@ import { ServiceService } from '../services/service.service';
 })
 export class CreateRestaurantComponent implements OnInit {
 
-  restaurantForm!: FormGroup;
+  restaurantForm: FormGroup;
   restaurant!: Restaurant;
 
   constructor(
     private fb: FormBuilder,
     private restaurantService: ServiceService,
     private route: ActivatedRoute
-  ) { }
-
-  ngOnInit(): void {
+  ) {
     this.restaurantForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(5)]],
       neighborhood: ['', [Validators.required]],
@@ -42,7 +40,9 @@ export class CreateRestaurantComponent implements OnInit {
         Sunday: ['', [Validators.required]]
       })
     });
+  }
 
+  ngOnInit(): void {
     this.route.params.subscribe(params => {
       console.log(params);
     })

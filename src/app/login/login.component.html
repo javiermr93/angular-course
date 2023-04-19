@@ -2,13 +2,13 @@
   <mat-card class="sizeCard" fxLayout="column" fxLayoutAlign="center center">
     <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="loginForm" (ngSubmit)="login()">
       <div fxFlex="auto">
-        <mat-form-field class="example-full-width" appearance="standard">
+        <mat-form-field class="example-full-width" appearance="outline">
           <mat-label>Username</mat-label>
           <input type="text" formControlName="user" matInput placeholder="Enter username"/>
         </mat-form-field>
       </div>
       <div fxFlex="auto">
-        <mat-form-field class="example-full-width" appearance="standard">
+        <mat-form-field class="example-full-width" appearance="outline">
           <mat-label>Password</mat-label>
           <input type="password" formControlName="password" matInput placeholder="Enter password"/>
         </mat-form-field>

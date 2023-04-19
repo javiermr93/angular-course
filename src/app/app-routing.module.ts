@@ -15,6 +15,7 @@ const routes: Routes = [
   },
   {
     path: '', component: HeaderComponent,
+    canActivate: [AccessGuard],
     children: [
       {
         path: "restaurants/new", component: CreateRestaurantComponent,
