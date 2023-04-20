@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RESTAURANTS } from '../mocks/restaurants.mock';
 import { Restaurant } from '../models/restaurant.model';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

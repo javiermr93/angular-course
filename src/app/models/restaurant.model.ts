@@ -31,18 +31,3 @@ class Review {
   rating!: number;
   comments!: string;
 }
-
-
-// class prueba {
-
-//   ejemplo: string;
-//   puedequesi?: string;
-//   obligatorio!: string;
-//   obligatorio2: string;
-
-//   constructor(ejemplo: string, obligatorio2: string) {
-//     this.ejemplo = ejemplo;
-//     this.obligatorio2 = obligatorio2;
-//   }
-
-// }
