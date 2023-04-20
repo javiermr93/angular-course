@@ -13,9 +13,9 @@
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button color="primary">LIKE</button>
-    <button mat-button color="warn">SHARE</button>
     <button mat-button color="accent" routerLink="/restaurants/{{restaurant_input.id}}">DETAIL</button>
+    <button mat-button color="warn" (click)="deleteRestaurant()">DELETE</button>
+    <button mat-button color="primary" (click)="editRestaurant()">EDIT</button>
   </mat-card-actions>
 </mat-card>
 

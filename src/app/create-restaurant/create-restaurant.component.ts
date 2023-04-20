@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Restaurant } from '../models/restaurant.model';
 import { ServiceService } from '../services/service.service';
 
@@ -10,15 +10,18 @@ import { ServiceService } from '../services/service.service';
   templateUrl: './create-restaurant.component.html',
   styleUrls: ['./create-restaurant.component.scss']
 })
-export class CreateRestaurantComponent implements OnInit {
+export class CreateRestaurantComponent implements OnInit, OnDestroy {
 
   restaurantForm: FormGroup;
   restaurant!: Restaurant;
+  editRestaurant = false;
+  idEditRestaurant = 0;
 
   constructor(
     private fb: FormBuilder,
     private restaurantService: ServiceService,
-    private route: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    private router: Router
   ) {
     this.restaurantForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(5)]],
@@ -43,13 +46,24 @@ export class CreateRestaurantComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.restaurantService.editRestaurantSubject.subscribe(x => {
+      this.restaurantForm.patchValue(x);
+      this.idEditRestaurant = x.id;
+      this.editRestaurant = true;
+    });
+
+    this.activateRoute.params.subscribe(params => {
       console.log(params);
     })
 
     this.restaurantForm.valueChanges.subscribe(values => {
       console.log(values);
     });
+  }
+
+  ngOnDestroy() {
+    // Vaciamos los datos que tenemos persistidos en el BehaviorSubject
+    this.restaurantService.editRestaurantSubject.next('');
   }
 
   validateOperatingHours(control: AbstractControl): {[key: string]: any} | null {
@@ -67,18 +81,11 @@ export class CreateRestaurantComponent implements OnInit {
 
   submitForm() {
     this.restaurant = this.restaurantForm.value;
-
-    let latitud = {
-      lat: this.restaurantForm.value.latlng,
-      lng: this.restaurantForm.value.latlng
+    if (this.editRestaurant) {
+      this.restaurantService.editRestaurant(this.idEditRestaurant, this.restaurantForm.value).subscribe((res) => this.router.navigate(['/restaurants', res.id]));
+    } else {
+      this.restaurantService.createRestaurant(this.restaurantForm.value).subscribe(() => this.router.navigate(['/restaurants']));
     }
-
-    delete this.restaurantForm.value.latlng;
-    this.restaurant.name
-    this.restaurant = this.restaurantForm.value;
-    this.restaurant.latlng = latitud;
-
-    // this.restaurantService.createRestaurant(this.restaurant).subscribe();
   }
 
 }
